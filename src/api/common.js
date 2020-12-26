@@ -1,0 +1,1 @@
+export const httpHeader = 'http://localhost:8000/api/v1/' // default url to ActivSearch API
