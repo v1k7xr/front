@@ -5,10 +5,11 @@
 <script>
 import UserDataActivInput from './components/UserDataActivInput.vue'
 
+
 export default {
   name: 'App',
   components: {
-    UserDataActivInput
+    UserDataActivInput,
   }
 }
 </script>
