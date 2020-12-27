@@ -111,7 +111,7 @@ export default {
             
 
             settings : {
-                apiKey: '3e37d02e-fc08-4b1e-981d-74465e8235dc',
+                apiKey: '',
                 lang: 'ru_RU',
                 coordorder: 'latlong',
                 version: '2.1'
