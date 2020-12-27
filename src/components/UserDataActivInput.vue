@@ -15,7 +15,7 @@
                     <div style="display: flex;align-content: center;width: 100%;justify-content: center">
                     <div >
                     
-                        <label >Время вылета рейса</label>
+                        <label >Количество часов в распоряжении</label>
                     <div class="col-lg-5">
                     <input type="datetime-local" id="start" name="trip-start" style="width: 250px;" >
                         <!--<input v-model="hoursNumber" placeholder="Укажите количество часов" style="width: 250px;">-->
@@ -73,16 +73,18 @@
                 </div>
 
                 <button v-on:click="computePath">Рассчитать маршрут</button>
-
-
+                <div class="map_conteiner">
+                    <google-map :name="name"> </google-map>
+                    
+                </div>
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
 import {httpHeader} from '../api/common'
+import googleMap from './googleMap'
 // import { loadYmap } from 'vue-yandex-maps'
 
 import axios from 'axios'
@@ -98,6 +100,8 @@ import axios from 'axios'
 export default {
     data() {
         return {
+            map:null,
+            mapCenter: {lat:0, lng:0},
             inputVisible : true,
             activitiesVisible : false,
             loading : false,
@@ -108,16 +112,17 @@ export default {
             activList : [],
             parsedActivList : [],
             choosedActives : [],
+            name: 'map',
             
-
-            settings : {
-                apiKey: '',
-                lang: 'ru_RU',
-                coordorder: 'latlong',
-                version: '2.1'
-            }
         }
     },
+
+    mounted: async function () {
+            let recaptchaScript = document.createElement('script')
+            recaptchaScript.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=')
+            await document.head.appendChild(recaptchaScript)
+    },
+    components: {googleMap},
 
     methods: {
 
@@ -133,6 +138,7 @@ export default {
             this.inputVisible = false;
             this.loading = true;
 
+            
 
             await axios
               .post(httpHeader, jsonData)
@@ -163,8 +169,6 @@ export default {
 
         computePath() {
             
-
-            console.log({});
         },
 
         getLonLatById(event, id) {
