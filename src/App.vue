@@ -10,7 +10,10 @@ export default {
   name: 'App',
   components: {
     UserDataActivInput,
-  }
+  },
+  created() {
+    
+  },
 }
 </script>
 
